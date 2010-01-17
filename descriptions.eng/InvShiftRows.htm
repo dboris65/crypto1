@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>InvShiftRows</title>
+</head>
+
+<body>
+
+<p><font face="Verdana" size="2">The principal task of InvShiftRows transformation is to 
+rearrange bytes of State to invert ShiftRows results. Now, last three rows of 
+State are shifted backwards, from right to left, as follows:</font></p>
+<p><font face="Courier New" size="2">--------------&nbsp;&nbsp;&nbsp; --------------<br>
+|7a 89 2b 3d | -&gt; |7a 89 2b 3d<b><font color="#000080"> </font></b>|<br>
+|d5 ef ca <font color="#000080"><b>9f </b></font> | -&gt; |<b><font color="#000080">9f</font></b> 
+d5 ef ca<font color="#000080"><b> </b></font>|<br>
+|fd 4e<font color="#000080"><b> 10 f5</b></font> | -&gt; |<font color="#000080"><b>10 
+f5</b></font> fd 4e |<br>
+|a7 <font color="#000080"><b>27 0b 9f </b></font>| -&gt; |<b><font color="#000080">27 
+0b 9f</font></b><font color="#000080"><b> </b></font>a7<font color="#000080"><b> </b></font>|<br>
+</font><font size="2" face="Courier New">--------------&nbsp;&nbsp;&nbsp; --------------</font></p>
+<p><font face="Verdana" size="2"><br>
+This is first InvShiftRows transformation from FIPS-197, pages 36-37.<br>
+You can edit contents of State and play with results.</font></p>
+
+<p>&nbsp;</p>
+
+</body>
+
+</html>

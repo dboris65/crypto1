@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<title>MixColumns</title>
+</head>
+
+<body>
+
+<p><font face="Verdana" size="2">MixColumns transformation takes column by 
+column from AES State and performs 
+matrix multiplication as follows:</font></p>
+<p>
+<font face="Courier New" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 02 03 01 01 |<br>
+new = | 01 02 03 01 | * old_column<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 01 01 02 03 |<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 03 01 01 02 |<br>
+or<br><br>
+|n1|&nbsp;&nbsp; | 02 03 01 01 |&nbsp;&nbsp; |o1|<br>
+|n2| = | 01 02 03 01 | * |o2|<br>
+|n3|&nbsp;&nbsp; | 01 01 02 03 |&nbsp;&nbsp; |o3|<br>
+|n4|&nbsp;&nbsp; | 03 01 01 02 |&nbsp;&nbsp; |o4|<br>
+&nbsp;</font></p>
+<p><font face="Verdana" size="2">To see it in action, just press MixColumns 
+button. Initial values are from FIPS-197, page 33. Moreover, You can play with 
+State values to check results.</font></p>
+
+</body>
+
+</html>

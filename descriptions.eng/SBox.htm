@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<title>S-Box</title>
+</head>
+
+<body>
+
+<p><font face="Verdana" size="2">To generate AES S-Box, we first must introduce 
+concept of multiplicative inverse. Multiplicative inverse for some number is one 
+divided by that number. In AES Galois fields, this is performed as follows: </p>
+<p>
+<br>
+if (a = 0) then<br>
+result := 0<br>
+else<br>
+result := exptable[(255 - ltable[a])];</p>
+
+<p>After that, multiplicative inverse is 
+transformed using following Affine transformation matrix:</p>
+</font>
+<font face="Verdana" size="2">|1 1 1 1 1 0 0 0|<br>
+|0 
+1 1 1 1 1 0 0|<br>
+|0 0 1 1 1 1 1 0| <br>
+|0 0 0 1 1 1 1 1| <br>
+|1 
+0 0 0 1 1 1 1|<br>
+|1 
+1 0 0 0 1 1 1|<br>
+|1 
+1 1 0 0 0 1 1|<br>
+|1 
+1 1 1 0 0 0 1|<br>
+
+
+<p>More precisely:</font><font face="Verdana" size="1"><br>
+</font>
+<font face="Courier New" size="2">
+Matrix * inv_val. xor $63=99dec<br>
+Matrix * 11001010 xor 01100011</p>
+</font>
+<font face="Verdana" size="2">
+<p>You can play with individual values, or you can generate complete S-Box 
+table at once. Then, when you have prepared table, you can apply SubBytes 
+transformation on State - just find value of that byte from State in our S-Box:<br>
+New_State_byte = SBox[Old_byte_state]</p>
+
+
+<p>Initial values for example State on the left are from FIPS-197, page 33.
+You can edit contents of State and play with results.</p>
+</font>
+</body>
+
+</html>
