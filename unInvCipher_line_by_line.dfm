@@ -72,7 +72,7 @@ object frInvCipher_line_by_line: TfrInvCipher_line_by_line
       Text = '2b7e151628aed2a6abf7158809cf4f3c'
     end
     object btCipher: TButton
-      Left = 112
+      Left = 40
       Top = 96
       Width = 75
       Height = 25
@@ -131,5 +131,14 @@ object frInvCipher_line_by_line: TfrInvCipher_line_by_line
     ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 1
+  end
+  object btClear: TButton
+    Left = 120
+    Top = 96
+    Width = 75
+    Height = 25
+    Caption = 'Clear'
+    TabOrder = 2
+    OnClick = btClearClick
   end
 end

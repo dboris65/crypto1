@@ -206,7 +206,7 @@ begin
     if((b AND 1) = 1) then
 	  begin
       Memo1.Lines.Add('---------------------------------------------------------------');
-      Memo1.Lines.Add('               Here we do the job - multiply a by x');
+      Memo1.Lines.Add('               //LoBitSet(b)? p=p+a.');
       Memo1.Lines.Add('               if (b AND 1) = 1 then: ');
       Memo1.Lines.Add('p:             ' + poly_from_byte(p));
       Memo1.Lines.Add('               XOR');
@@ -226,7 +226,10 @@ begin
 
     hi_bit_set:= (a AND $80);
     if (hi_bit_set = $80) then
-       Memo1.Lines.Add('               HiBitSet(a) = true');
+       Memo1.Lines.Add('               HiBitSet(a) = true; Need reduction!')
+    else
+       Memo1.Lines.Add('               HiBitSet(a) = false');
+
     a := a SHL 1;
     Memo1.Lines.Add('---------------------------------------------------------------');
     Memo1.Lines.Add('(a SHL 1):     ' + poly_from_byte(a));

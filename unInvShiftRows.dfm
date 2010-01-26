@@ -1,5 +1,5 @@
 object frInvShiftRows: TfrInvShiftRows
-  Left = 218
+  Left = 183
   Top = 172
   Width = 841
   Height = 389
