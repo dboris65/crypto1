@@ -41,11 +41,11 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function galoa_mul(a : Byte; b : Byte) : Byte;
-    function galoa_mul_watch(a : Byte; b : Byte) : Byte;
+    function galois_mul_slow(a : Byte; b : Byte) : Byte;
+    function galois_mul_slow_watch(a : Byte; b : Byte) : Byte;
 
-    function galoa_mul_tab(a : Byte; b : Byte) : Byte;
-    function galoa_mul_tab_watch(a : Byte; b : Byte) : Byte;
+    function galois_mul_tab(a : Byte; b : Byte) : Byte;
+    function galois_mul_tab_watch(a : Byte; b : Byte) : Byte;
   end;
 
 var
@@ -80,7 +80,7 @@ end;
 
 //******************************************************************************
 // Galois multiplication using tables
-function TfrGMul.galoa_mul_tab(a : Byte; b : Byte) : Byte;
+function TfrGMul.galois_mul_tab(a : Byte; b : Byte) : Byte;
 var s, z : integer;
 begin
   z := 0;
@@ -96,7 +96,7 @@ end;
 
 //******************************************************************************
 // Galois multiplication using tables - with subresults
-function TfrGMul.galoa_mul_tab_watch(a : Byte; b : Byte) : Byte;
+function TfrGMul.galois_mul_tab_watch(a : Byte; b : Byte) : Byte;
 var s, z : integer;
 begin
   Memo1.Lines.Add('----------------------------------------------');
@@ -132,7 +132,7 @@ end;
 
 //******************************************************************************
 // slow version
-function TfrGMul.galoa_mul(a : Byte; b : Byte) : Byte;
+function TfrGMul.galois_mul_slow(a : Byte; b : Byte) : Byte;
 var p                   : Byte;
     cntr                : Byte;
     hi_bit_set          : Byte;
@@ -154,7 +154,7 @@ begin
 end;
 //******************************************************************************
 // slow version - with subresults
-function TfrGMul.galoa_mul_watch(a : Byte; b : Byte) : Byte;
+function TfrGMul.galois_mul_slow_watch(a : Byte; b : Byte) : Byte;
 var p                   : Byte;
     cntr                : Byte;
     hi_bit_set          : Byte;
@@ -173,7 +173,14 @@ var p                   : Byte;
         if (b AND $80) = $80 then
         begin
           bin := bin + '1';
-          poly := poly + ' X^' + IntToStr(7-counter);
+          if counter = 7 then
+            poly := poly + ' 1'
+          else
+          if counter = 6 then
+            poly := poly + ' X'
+          else
+            poly := poly + ' X^' + IntToStr(7-counter);
+
           if counter < 7 then
              poly := poly + '+';
         end
@@ -299,7 +306,7 @@ begin
   for i := 1 to 259 do
   begin
     // we use slow version only to generate tables
-    mult := galoa_mul(mult, ibase);
+    mult := galois_mul_slow(mult, ibase);
     s_exp := s_exp + IntToHex(mult, 2) + ', ';
 
 
@@ -361,7 +368,7 @@ end;
 
 
 //******************************************************************************
-// check input values and call galoa_mul_tab_watch
+// check input values and call galois_mul_tab_watch
 procedure TfrGMul.btGMulTabClick(Sender: TObject);
 var ai, bi, ri : integer;
 begin
@@ -398,7 +405,7 @@ begin
   btGenExpTableHex.OnClick(nil);
 
 
-  ri := galoa_mul_tab_watch(ai, bi);
+  ri := galois_mul_tab_watch(ai, bi);
   R.Text := IntToStr(ri);
   Rhex.Text := '$' + IntToHex(ri, 2);
 end;
@@ -440,7 +447,7 @@ begin
   end;
 
   Memo1.Clear;
-  ri := galoa_mul_watch(ai, bi);
+  ri := galois_mul_slow_watch(ai, bi);
   R.Text := IntToStr(ri);
   Rhex.Text := '$' + IntToHex(ri, 2);
 end;
