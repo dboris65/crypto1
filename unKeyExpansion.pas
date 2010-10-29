@@ -275,7 +275,7 @@ begin
 	i := 1;
   memo_line := ' |          | After    | After    |          | After    |           | key[i]=temp     ';
   Memo1.Lines.Add(memo_line);
-  memo_line := ' | temp     | RotWord  | SubWord  | Rcon     | xor Rcon | key[i-24] | xor key[i-24]';
+  memo_line := ' | temp     | RotWord  | SubWord  | Rcon     | xor Rcon | key[i-16] | xor key[i-16]';
   Memo1.Lines.Add(memo_line);
   memo_line := ' |----------|----------|----------|----------|----------|-----------|--------------';
   Memo1.Lines.Add(memo_line);
@@ -309,7 +309,7 @@ begin
 
       for a := 0 to 3 do
       begin
-         tmp_line1 := tmp_line1 + IntToHex(key[c - 24], 2);
+         tmp_line1 := tmp_line1 + IntToHex(key[c - 16], 2);
          key[c] := key[c - 24] XOR tmpkey[a];
          tmp_line2 := tmp_line2 + IntToHex(key[c], 2);
          inc(c);
@@ -346,7 +346,7 @@ begin
 
   memo_line := ' |          | After    | After    |          | After    |           | key[i]=temp     ';
   Memo1.Lines.Add(memo_line);
-  memo_line := ' | temp     | RotWord  | SubWord  | Rcon     | xor Rcon | key[i-32] | xor key[i-32]';
+  memo_line := ' | temp     | RotWord  | SubWord  | Rcon     | xor Rcon | key[i-16] | xor key[i-16]';
   Memo1.Lines.Add(memo_line);
   memo_line := ' |----------|----------|----------|----------|----------|-----------|--------------';
   Memo1.Lines.Add(memo_line);
@@ -395,7 +395,7 @@ begin
 
       for a := 0 to 3 do
       begin
-         tmp_line1 := tmp_line1 + IntToHex(key[c - 32], 2);
+         tmp_line1 := tmp_line1 + IntToHex(key[c - 16], 2);
          key[c] := key[c - 32] XOR tmpkey[a];
          tmp_line2 := tmp_line2 + IntToHex(key[c], 2);
          inc(c);

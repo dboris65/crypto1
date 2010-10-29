@@ -25,11 +25,9 @@ type
     UlazniVektor: TEdit;
     lRezultat: TLabel;
     Rezultat: TEdit;
-    btClear: TButton;
     procedure rgTestVektoriClick(Sender: TObject);
     procedure btCipherClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -198,14 +196,11 @@ end;
 procedure TfrCipher_line_by_line.print_round_key(key_index : byte; round : integer);
 var i : integer;
     s : string;
-    start : integer;
 begin
-  start := 16;
-  key_index := start + key_index;
   s := '';
   for i := 0 to 15 do
     s := s + IntToHex(key[ key_index + i ], 2);
-  Memo1.Lines.Add('round[' + Format('%2d', [round]) + '].' + 'k_sch' + '     ' + s + '    ---------- Part of expanded key on pos.' + IntToStr(key_index) + ' (16 bytes)')
+  Memo1.Lines.Add('round[' + Format('%2d', [round]) + '].' + 'k_sch' + '     ' + s + '    ---------- Part of expanded key on pos.' + IntToStr(key_index) + ' - 16 bytes')
 
 end;
 
@@ -741,11 +736,6 @@ end;
 procedure TfrCipher_line_by_line.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 Action := caFree;
-end;
-
-procedure TfrCipher_line_by_line.btClearClick(Sender: TObject);
-begin
-  Memo1.Lines.Clear;
 end;
 
 end.

@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, StdCtrls, ExtCtrls, OleCtrls, SHDocVw_TLB;
+  Dialogs, Grids, StdCtrls, ExtCtrls, OleCtrls, SHDocVw_Tlb;
 
 type
   TfrShiftRows = class(TForm)

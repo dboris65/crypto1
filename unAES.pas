@@ -1224,6 +1224,7 @@ var in_file, out_file : file;
     inp  : array [0..15] of Byte;
     input_len, i : integer;
     padding : byte;
+    pad16 : boolean;
 begin
 
     case key_len of
@@ -1273,12 +1274,19 @@ begin
     ProgressBar.Max := file_size;
     {$endif}
 
+    pad16 := false;
     while ( byte_counter < input_len ) do
     begin
       FillChar(inp, 16, 0);
 
-      if ( input_len - byte_counter ) >= 16 then
+      if ( input_len - byte_counter ) > 16 then
         BlockRead(in_file, inp, 16)
+      else
+      if ( input_len - byte_counter ) = 16 then
+      begin
+        BlockRead(in_file, inp, 16);
+        pad16 := true;
+      end
       else
       begin
         //---------------------------------------------------
@@ -1296,6 +1304,13 @@ begin
       set_input(inp);
       Cipher(key_len);
       BlockWrite(out_file, state, 16);
+      if pad16 then
+      begin
+        FillChar(inp, 16, 16);
+        set_input(inp);
+        Cipher(key_len);
+        BlockWrite(out_file, state, 16);
+      end;
     end;
     closefile(in_file);
     closefile(out_file);
@@ -1319,6 +1334,7 @@ var in_file, out_file : file;
     padding, bytes_of_padding : byte;
     i, j : integer;
     is_padding : boolean;
+    pad16 : boolean;
 begin
 
     case key_len of
@@ -1377,41 +1393,56 @@ begin
       InvCipher(key_len);
 
 
-
-      if input_len = byte_counter then
+      pad16 := false;
+      if (input_len = byte_counter) then
       begin
           // at the end is n bytes with padding n
           // so we will remove them
           is_padding := true;
           padding := state[3, 3];
           bytes_of_padding := padding;
-          for i := 3 downto 0 do
-            for j := 3 downto 0 do
-             if state[i, j] <> padding then
-             begin
-                // end - this is padding
-                if bytes_of_padding = 0 then
-                   break;
+          if padding = 16 then
+             pad16 := true
+          else
+          begin
+            for i := 3 downto 0 do
+            begin
+              for j := 3 downto 0 do
+              begin
+               if state[i, j] <> padding then
+               begin
+                  // end - this is padding
+                  if bytes_of_padding = 0 then
+                     break;
 
-                // this is not padding, so break the loop
-                is_padding := false;
-                break;
-             end
-             else
-                dec(bytes_of_padding);
-
-          // remove padding      
-          if is_padding then
-          for i := 3 downto 0 do
-            for j := 3 downto 0 do
-             if state[i, j] = padding then
-                state[i, j] := 0;
+                  // this is not padding, so break the loop
+                  is_padding := false;
+                  break;
+               end
+               else
+                  dec(bytes_of_padding);
+              end;
+               if is_padding = false then
+                  break;
+               if bytes_of_padding = 0 then
+                  break;
+            end;
+            // remove padding
+            if is_padding then
+            for i := 3 downto 0 do
+              for j := 3 downto 0 do
+               if state[i, j] = padding then
+                  state[i, j] := 0;
+          end;
       end;
 
-      if is_padding then
-        BlockWrite(out_file, state, 16-padding)
-      else
-        BlockWrite(out_file, state, 16);
+      if pad16 = false then
+      begin
+        if is_padding then
+          BlockWrite(out_file, state, 16-padding)
+        else
+          BlockWrite(out_file, state, 16);
+      end;
     end;
     closefile(in_file);
     closefile(out_file);

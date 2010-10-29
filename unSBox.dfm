@@ -1,5 +1,5 @@
 object frSBox: TfrSBox
-  Left = 178
+  Left = 234
   Top = 133
   Width = 846
   Height = 426

@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, StdCtrls, OleCtrls, ExtCtrls, SHDocVw_TLB;
+  Dialogs, Grids, StdCtrls, OleCtrls, SHDocVw_Tlb, ExtCtrls;
 
 type
   TfrInvMixColumns = class(TForm)

@@ -1,6 +1,6 @@
 object frMonteCarlo: TfrMonteCarlo
-  Left = 188
-  Top = 127
+  Left = 756
+  Top = 515
   Width = 928
   Height = 480
   Caption = 'MonteCarlo'

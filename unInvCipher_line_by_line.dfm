@@ -72,7 +72,7 @@ object frInvCipher_line_by_line: TfrInvCipher_line_by_line
       Text = '2b7e151628aed2a6abf7158809cf4f3c'
     end
     object btCipher: TButton
-      Left = 40
+      Left = 112
       Top = 96
       Width = 75
       Height = 25
@@ -105,7 +105,7 @@ object frInvCipher_line_by_line: TfrInvCipher_line_by_line
       HelpType = htKeyword
       HelpKeyword = 'PrviNacin'
       TabOrder = 4
-      Text = '3243f6a8885a308d313198a2e0370734'
+      Text = '3925841d02dc09fbdc118597196a0b32'
     end
     object Rezultat: TEdit
       Left = 200
@@ -131,14 +131,5 @@ object frInvCipher_line_by_line: TfrInvCipher_line_by_line
     ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 1
-  end
-  object btClear: TButton
-    Left = 120
-    Top = 96
-    Width = 75
-    Height = 25
-    Caption = 'Clear'
-    TabOrder = 2
-    OnClick = btClearClick
   end
 end

@@ -1,6 +1,6 @@
 object frShiftRows: TfrShiftRows
-  Left = 184
-  Top = 205
+  Left = 217
+  Top = 313
   Width = 840
   Height = 365
   Caption = 'ShiftRows'

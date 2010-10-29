@@ -1,6 +1,6 @@
 object frInvMixColumns: TfrInvMixColumns
-  Left = 216
-  Top = 160
+  Left = 235
+  Top = 169
   Width = 808
   Height = 410
   Caption = 'InvMixColumns'

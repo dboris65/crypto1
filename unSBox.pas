@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, OleCtrls, Grids, SHDocVw_TLB;
+  Dialogs, StdCtrls, ExtCtrls, OleCtrls, SHDocVw_Tlb, Grids;
 
 type
   TfrSBox = class(TForm)

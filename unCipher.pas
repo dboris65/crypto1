@@ -25,12 +25,10 @@ type
     UlazniVektor: TEdit;
     lRezultat: TLabel;
     Rezultat: TEdit;
-    btClear: TButton;
     procedure rgTestVektoriClick(Sender: TObject);
     procedure btCipherClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -233,22 +231,22 @@ var i : integer;
 begin
   s := '|';
   for i := 0 to 3 do
-    s := s + IntToHex(key[4*i + key_index + 0], 2) + ' ';
+    s := s + IntToHex(key[4*i + 0], 2) + ' ';
   memo_line1 := memo_line1 + s;
 
   s := '|';
   for i := 0 to 3 do
-    s := s + IntToHex(key[4*i + key_index + 1], 2) + ' ';
+    s := s + IntToHex(key[4*i + 1], 2) + ' ';
   memo_line2 := memo_line2 + s;
 
   s := '|';
   for i := 0 to 3 do
-    s := s + IntToHex(key[4*i + key_index + 2], 2) + ' ';
+    s := s + IntToHex(key[4*i + 2], 2) + ' ';
   memo_line3 := memo_line3 + s;
 
   s := '|';
   for i := 0 to 3 do
-    s := s + IntToHex(key[4*i + key_index + 3], 2) + ' ';
+    s := s + IntToHex(key[4*i + 3], 2) + ' ';
   memo_line4 := memo_line4 + s;
 end;
 
@@ -467,7 +465,7 @@ begin
     memo_line2 := memo_line2 + '|            |  ';
     memo_line3 := memo_line3 + '|            |  ';
     memo_line4 := memo_line4 + '|            |  ';
-    print_round_key(4*(round2+1)*Nb);
+    print_round_key(4*round2*Nb);
 
     inc(round2);
     add_lines(round2);
@@ -807,11 +805,6 @@ memo_line1 := '';
 memo_line2 := '';
 memo_line3 := '';
 memo_line4 := '';
-end;
-
-procedure TfrCipher.btClearClick(Sender: TObject);
-begin
-  Memo1.Lines.Clear;
 end;
 
 end.

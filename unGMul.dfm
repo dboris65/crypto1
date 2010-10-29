@@ -1,6 +1,6 @@
 object frGMul: TfrGMul
   Left = 183
-  Top = 196
+  Top = 265
   Width = 742
   Height = 374
   Caption = 'Galoa Multiplication'

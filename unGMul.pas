@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, OleCtrls, SHDocVw_TLB;
+  Dialogs, StdCtrls, ExtCtrls, OleCtrls, SHDocVw_Tlb;
 
 type
   TfrGMul = class(TForm)
@@ -42,7 +42,7 @@ type
   public
     { Public declarations }
     function galois_mul_slow(a : Byte; b : Byte) : Byte;
-    function galois_mul_slow_watch(a : Byte; b : Byte) : Byte;
+    function galois_mul_watch(a : Byte; b : Byte) : Byte;
 
     function galois_mul_tab(a : Byte; b : Byte) : Byte;
     function galois_mul_tab_watch(a : Byte; b : Byte) : Byte;
@@ -85,7 +85,7 @@ var s, z : integer;
 begin
   z := 0;
   s := Main.ltable[a] + Main.ltable[b]; // Tables are in main unit
-  s := s mod 255;
+  s := s mod 255;                       // Circular reduction - if s >= 255
   s := Main.exptable[s];
   if a = 0 then
     s := z;
@@ -144,17 +144,17 @@ begin
 	    p := p XOR a;
     hi_bit_set:= (a AND $80);
     a := a SHL 1;
-                                 // this is modulo $11b
+                                 {SHL already implemented, thus we do not use $11B, but $1B}
     if (hi_bit_set = $80) then   // $1b = 11011
-    	a := a XOR $1b;            // We already shifted a, so
-                                 // we wont use $11b, but $1b
+    	a := a XOR $1b;
+
     b := b SHR 1; 
   end;
   Result := p;
 end;
 //******************************************************************************
 // slow version - with subresults
-function TfrGMul.galois_mul_slow_watch(a : Byte; b : Byte) : Byte;
+function TfrGMul.galois_mul_watch(a : Byte; b : Byte) : Byte;
 var p                   : Byte;
     cntr                : Byte;
     hi_bit_set          : Byte;
@@ -201,7 +201,7 @@ begin
   irreducible := $1b;
   for cntr := 0 to 7 do
   begin
-    Memo1.Lines.Add('--------------------------------------------------------------------------------------------');
+    Memo1.Lines.Add('********************************************************************************************');
     Memo1.Lines.Add('--------------------------------------------------------------------------------------------');
     Memo1.Lines.Add('        cntr = ' + IntToStr(cntr));
     Memo1.Lines.Add('a            = ' + poly_from_byte(a));
@@ -245,7 +245,7 @@ begin
     if (hi_bit_set = $80) then   // $1b = 11011
     begin
       Memo1.Lines.Add('---------------------------------------------------------------');
-      Memo1.Lines.Add('               if HiBitSet_InPreviousStep(a) then:');
+      Memo1.Lines.Add('               if HiBitSet_InPreviousStep(a) then: // Reduction!');
 
       Memo1.Lines.Add('a:             ' + poly_from_byte(a));
       Memo1.Lines.Add('               XOR');
@@ -267,7 +267,8 @@ begin
   end;
   Memo1.Lines.Add('');
   Memo1.Lines.Add(hex_mul);
-  Memo1.Lines.Add('= ' + IntToHex(p, 2));
+  Memo1.Lines.Add('= $' + IntToHex(p, 2));
+  Memo1.Lines.Add('=  ' + IntToStr(p) + ' dec');
 
   Result := p;
 end;
@@ -447,7 +448,7 @@ begin
   end;
 
   Memo1.Clear;
-  ri := galois_mul_slow_watch(ai, bi);
+  ri := galois_mul_watch(ai, bi);
   R.Text := IntToStr(ri);
   Rhex.Text := '$' + IntToHex(ri, 2);
 end;

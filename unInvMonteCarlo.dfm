@@ -1,6 +1,6 @@
 object frInvMonteCarlo: TfrInvMonteCarlo
-  Left = 294
-  Top = 196
+  Left = 115
+  Top = 242
   Width = 928
   Height = 480
   Caption = 'InvMonteCarlo'

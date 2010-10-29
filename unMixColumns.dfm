@@ -1,6 +1,6 @@
 object frMixColumns: TfrMixColumns
-  Left = 201
-  Top = 238
+  Left = 289
+  Top = 369
   Width = 823
   Height = 332
   Caption = 'MixColumns'

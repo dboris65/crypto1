@@ -25,12 +25,10 @@ type
     UlazniVektor: TEdit;
     lRezultat: TLabel;
     Rezultat: TEdit;
-    btClear: TButton;
     procedure rgTestVektoriClick(Sender: TObject);
     procedure btCipherClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -827,11 +825,6 @@ memo_line1 := '';
 memo_line2 := '';
 memo_line3 := '';
 memo_line4 := '';
-end;
-
-procedure TfrInvCipher.btClearClick(Sender: TObject);
-begin
-  Memo1.Lines.Clear;
 end;
 
 end.
